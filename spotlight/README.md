@@ -1,24 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is an installation of [Spotlight](https://github.com/projectblacklight/spotlight) version 3.3. The aim is to integrate this spotlight with a Hyrax3 application.
+The project is currently configured for the data in https://digital.wpi.edu/
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
+## Run Spotlight
 
-* Configuration
+Clone the project and change directories to the spotlight application
 
-* Database creation
+```
+$ git clone https://github.com/CottageLabs/spotlight.git
+$ cd spotlight/spotlight
+```
 
-* Database initialization
+Start Solr (possibly using `solr_wrapper` in development or testing):
 
-* How to run the test suite
+```
+$ solr_wrapper
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+and the Rails development server:
 
-* Deployment instructions
+```
+$ rails server
+```
 
-* ...
+Go to http://localhost:3000 in your browser.
+
