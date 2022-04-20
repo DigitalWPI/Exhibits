@@ -28,7 +28,7 @@ set :deploy_to, "/var/#{my_app_name}"
 # Default value for linked_dirs is []
 # append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 # append :linked_dirs, "log", "vendor", "public/assets", "public/branding", "tmp", "batch-loader"
-append :linked_dirs, "log", "vendor", "tmp"
+append :linked_dirs, "spotlight/log", "spotlight/vendor", "spotlight/tmp"
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
