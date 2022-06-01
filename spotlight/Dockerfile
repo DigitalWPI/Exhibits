@@ -1,12 +1,7 @@
-FROM ruby:2.7-buster
+FROM ruby:2.7.6-buster
 
 # Setup build variables
 ARG RAILS_ENV
-ARG DERIVATIVES_PATH
-ARG UPLOADS_PATH
-ARG CACHE_PATH
-ARG FITS_PATH
-ARG FITS_VERSION
 ARG IM_VERSION=7.0.7-39
 
 ENV APP_PRODUCTION=/data/ \
@@ -46,12 +41,6 @@ RUN git clone https://github.com/ImageMagick/ImageMagick.git && \
     ./configure --prefix=/usr --without-magick-plus-plus --disable-docs --disable-static --with-tiff && \
     make && make install
 
-RUN mkdir -p /fits/ \
-    && wget -q https://github.com/harvard-lts/fits/releases/download/$FITS_VERSION/fits-$FITS_VERSION.zip -O /fits/fits-$FITS_VERSION.zip \
-    && unzip -q /fits/fits-$FITS_VERSION.zip -d /fits/fits-$FITS_VERSION \
-    && chmod a+x $FITS_PATH \
-    && rm /fits/fits-$FITS_VERSION.zip
-
 # copy gemfiles to production folder
 COPY Gemfile Gemfile.lock $APP_PRODUCTION
 
@@ -66,12 +55,7 @@ RUN cd $APP_PRODUCTION && \
     && mv Gemfile.lock Gemfile.lock.built_by_docker
 
 # copy the seeds
-COPY ./seed /seed
-
-# create a folder to store derivatives, file uploads and cache directory
-RUN mkdir -p $DERIVATIVES_PATH
-RUN mkdir -p $UPLOADS_PATH
-RUN mkdir -p $CACHE_PATH
+# COPY ./seed /seed
 
 # copy the application
 COPY . $APP_PRODUCTION
