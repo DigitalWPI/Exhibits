@@ -26,9 +26,10 @@ if [ "$RAILS_ENV" != "production" ]; then
 fi
 
 # echo "Setting up spotlight... (this can take a few minutes)"
-# bundle exec rake spotlight:setup_hyrax["seed/setup.json"]
+# bundle exec rake spotlight:setup_spotlight["seed/setup.json"]
 npm install --unsafe-perm  # install uv, --unsafe-perm for root permission
 
 echo "--------- Starting Spotlight in $RAILS_ENV mode ---------"
 rm -f /tmp/spotlight.pid
 bundle exec rails server -p 3005 -b '0.0.0.0' --pid /tmp/spotlight.pid
+

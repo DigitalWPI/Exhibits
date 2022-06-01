@@ -41,13 +41,13 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV['POSTGRES_DB_APP'] || 'hyrax_development' %>
+  database: <%= ENV['POSTGRES_DB_APP'] || 'spotlight_development' %>
 
 test:
   <<: *default
-  database: <%= ENV['POSTGRES_DB_TEST'] || 'hyrax_test' %>
+  database: <%= ENV['POSTGRES_DB_TEST'] || 'spotlight_test' %>
 
 production:
   <<: *default
-  database: <%= ENV['POSTGRES_DB_APP'] || 'hyrax_production' %>
+  database: <%= ENV['POSTGRES_DB_APP'] || 'spotlight_production' %>
   pool: 50
