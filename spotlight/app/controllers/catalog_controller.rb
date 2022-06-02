@@ -72,11 +72,11 @@ class CatalogController < ApplicationController
     config.add_index_field "creator_tesim", itemprop: 'creator', link_to_search: "creator_sim"
     config.add_index_field "advisor_tesim", label: "Advisor", itemprop: 'advisor', link_to_search: "advisor_sim"
     config.add_index_field "publisher_tesim", itemprop: 'publisher', link_to_search: "publisher_sim"
-    config.add_index_field "date_created_dtsim, itemprop: 'dateCreated'
+    config.add_index_field "date_created_dtsim", itemprop: 'dateCreated'
     config.add_index_field "resource_type_tesim", label: "Resource Type", link_to_search: "resource_type_sim"
     config.add_index_field "degree_tesim", label: "Degree"
     config.add_index_field "department_tesim", label: "Unit"
-    # config.add_index_field description_tesim, itemprop: 'description' #, helper_method: :iconify_auto_link
+    # config.add_index_field "description_tesim", itemprop: 'description' #, helper_method: :iconify_auto_link
     # config.add_index_field "subject_tesim", itemprop: 'about', link_to_search: "subject_sim"
     # config.add_index_field "contributor_tesim", itemprop: 'contributor', link_to_search: "contributor_sim"
     # config.add_index_field "proxy_depositor_ssim", label: "Depositor" #, helper_method: :link_to_profile
@@ -103,7 +103,7 @@ class CatalogController < ApplicationController
     config.add_show_field "contributor_tesim"
     config.add_show_field "publisher_tesim"
     config.add_show_field "date_created_tesim"
-    config.add_show_field "degree_tesim, label: "Degree"
+    config.add_show_field "degree_tesim", label: "Degree"
     config.add_show_field "department_tesim", label: "Unit"
     config.add_show_field "format_tesim"
     config.add_show_field "identifier_tesim"
