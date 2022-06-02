@@ -47,7 +47,7 @@ class CatalogController < ApplicationController
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
-    config.add_facet_field "human_readable_type_tesim", label: "Type", limit: 5
+    config.add_facet_field "human_readable_type_sim", label: "Type", limit: 5
     config.add_facet_field "member_of_collection_ids_ssim", label: 'Collections', sort: 'count'
     config.add_facet_field "year_sim", label: "Year", limit: 5, sort: 'index desc'
     config.add_facet_field "creator_sim", label: "Creator", limit: 5, sort: 'index', index_range: 'A'..'Z'
