@@ -2,6 +2,7 @@ version: '3'
 
 volumes:
   sdb:
+  solr:
 
 networks:
   internal:
@@ -63,6 +64,29 @@ services:
       timeout: 5s
       retries: 3
 
+  solr:
+    image: solr:8
+    expose:
+      - 8983
+    ports:
+      - 8983:8983
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "wget -O /dev/null http://localhost:8983/solr/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      internal:
+    volumes:
+      - solr:/opt/solr/server/solr/mycores
+      - ./spotlight/solr/conf:/opt/solr/solr_conf
+    command:
+      - sh
+      - "-c"
+      - "precreate-core spotlight-test /opt/solr/solr_conf; solr-precreate ${SOLR_CORE} /opt/solr/solr_conf"
+
   spotlight:
     build:
       context: spotlight
@@ -78,6 +102,7 @@ services:
       internal:
     depends_on:
       - sdb
+      - solr
     expose:
       - 3005
 
