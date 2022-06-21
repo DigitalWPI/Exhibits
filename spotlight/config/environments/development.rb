@@ -58,15 +58,4 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-
-  config.force_ssl = false
-  if ENV['APP_HOST'].present?
-    Rails.application.routes.default_url_options = {protocol: 'http', host: ENV['APP_HOST']}
-    Blacklight::Engine.routes.default_url_options = {protocol: 'http', host: ENV['APP_HOST']}
-    config.application_url = "http://#{ENV['APP_HOST']}"
-  else
-    Rails.application.routes.default_url_options = {protocol: 'http', host: "localhost"}
-    Blacklight::Engine.routes.default_url_options = {protocol: 'http', host: "localhost"}
-    config.application_url = "http://localhost"
-  end
 end
