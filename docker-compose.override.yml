@@ -1,0 +1,27 @@
+# Overrides the docker-compose file for development environment
+# - Use the example end.production file (because in dev it doesn't matter)
+# - Publish the fcrepo and solr ports
+# - No nginx in front of the app
+# - app accessible on port 3000
+
+
+version: '3'
+
+volumes:
+  file_uploads:
+
+services:
+
+  spotlight:
+    ports:
+      - 3005:3005
+    environment:
+      - RAILS_FORCE_SSL=false
+    volumes:
+      - ${HOST_APP_DATA_PATH:-/data/spotlight/}:/data/data
+      - ./spotlight:/data:cached
+    networks:
+      internal:
+        aliases:
+          - spotlight
+

@@ -1,0 +1,15 @@
+<footer class="navbar navbar-inverse site-footer">
+  <div class="container-fluid">
+    <div class="navbar-text text-left">
+        <p><%= t('blacklight.footer.service_html') %></p>
+        <p><%= t('blacklight.product_name') %></p>
+        <p><%= mail_to "digitalwpi@wpi.edu", "Contact Us"%></p>
+    </div>
+    <div class="navbar-right">
+      <div class="text-right">
+        <%= render 'shared/user_util_links' %>
+        <p><%= t('blacklight.footer.copyright_html') %></p>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -10,7 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_24_121628) do
+ActiveRecord::Schema.define(version: 2022_06_14_231033) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "bookmarks", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -276,7 +279,7 @@ ActiveRecord::Schema.define(version: 2022_03_24_121628) do
     t.string "type"
     t.string "slug"
     t.string "scope"
-    t.text "content", limit: 16777215
+    t.text "content"
     t.integer "weight", default: 1000
     t.boolean "published"
     t.integer "exhibit_id"
@@ -374,7 +377,7 @@ ActiveRecord::Schema.define(version: 2022_03_24_121628) do
     t.string "document_type"
     t.integer "resource_id"
     t.string "resource_type"
-    t.binary "index_status", limit: 10485760
+    t.binary "index_status"
     t.index ["document_type", "document_id"], name: "spotlight_solr_document_sidecars_solr_document"
     t.index ["exhibit_id", "document_type", "document_id"], name: "by_exhibit_and_doc", unique: true
     t.index ["exhibit_id", "document_type", "document_id"], name: "spotlight_solr_document_sidecars_exhibit_document"
@@ -429,7 +432,18 @@ ActiveRecord::Schema.define(version: 2022_03_24_121628) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "guest", default: false
+    t.string "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer "invitation_limit"
+    t.string "invited_by_type"
+    t.bigint "invited_by_id"
+    t.integer "invitations_count", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id"
+    t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -438,7 +452,7 @@ ActiveRecord::Schema.define(version: 2022_03_24_121628) do
     t.bigint "item_id", null: false
     t.string "event", null: false
     t.string "whodunnit"
-    t.text "object", limit: 1073741823
+    t.text "object"
     t.datetime "created_at"
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end

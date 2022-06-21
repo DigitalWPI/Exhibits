@@ -1,0 +1,25 @@
+<% class_name = controller_name == 'homepage' ? 'image-masthead' : 'image-masthead shortstack' %>
+<div class="<%= class_name %>">
+  <% banner_image = current_masthead&.iiif_url.present? ? current_masthead.iiif_url : asset_path("TestBackground@2x.png") %>
+  <span class='background-container' style="background-image: url('<%= banner_image %>')"></span>
+  <span class='background-container-gradient'></span>
+
+  <div class="main_top_menu">
+    <div class="col-sm-6 logo_image">
+      <%= image_tag "DigitalWPILogo_2019.png" %>
+    </div>
+
+    <% if current_exhibit %>
+      <%= render 'shared/exhibit_navbar' %>
+    <% else %>
+      <%= render 'shared/site_navbar' %>
+    <% end %>
+  </div>
+
+  <!-- Brand and toggle get grouped for better mobile display -->
+  <div class="large-header-nav col-sm-6 col-sm-offset-3 search-holder">
+    <h3>Explore, Discover, Share</h3>
+    <%= render partial: 'catalog/search_form' %>
+  </div>
+  </div>
+</div>

@@ -1,0 +1,110 @@
+version: '3'
+
+volumes:
+  sdb:
+  solr:
+
+networks:
+  internal:
+
+services:
+#  sdb:
+#    image: mariadb
+#    command: --max-allowed-packet=64MB
+#    restart: always
+#    volumes:
+#      - sdb:/var/lib/mysql
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#      - MYSQL_DATABASE=${MYSQL_DB_APP}
+#      - MYSQL_HOST=${MYSQL_HOST_APP}
+#      - MYSQL_PORT=${MYSQL_PORT_APP}
+#    env_file:
+#      - .env
+#    expose:
+#      - ${MYSQL_PORT_APP}
+#    networks:
+#      internal:
+#        aliases:
+#          - sdb
+#
+#  sdb-test:
+#    image: mariadb
+#    command: --max-allowed-packet=64MB
+#    restart: always
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+#      - MYSQL_DATABASE=${MYSQL_DB_TEST}
+#      - MYSQL_HOST=${MYSQL_HOST_TEST}
+#      - MYSQL_PORT=${MYSQL_PORT_TEST}
+#    env_file:
+#      - .env
+#    expose:
+#      - ${MYSQL_PORT_TEST}
+#    networks:
+#      internal:
+#        aliases:
+#          - sdb-test
+
+  sdb:
+    image: postgres:13-alpine
+    networks:
+      internal:
+    env_file:
+      - .env
+    expose:
+      - 5432
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB_APP}
+    volumes:
+      - sdb:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "POSTGRES_PASSWORD=${POSTGRES_PASSWORD} pg_isready -U ${POSTGRES_USER} -h localhost -d ${POSTGRES_DB_APP}"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  solr:
+    image: solr:8
+    expose:
+      - 8983
+    ports:
+      - 8983:8983
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "wget -O /dev/null http://localhost:8983/solr/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    networks:
+      internal:
+    volumes:
+      - solr:/opt/solr/server/solr/mycores
+      - ./spotlight/solr/conf:/opt/solr/solr_conf
+    command:
+      - sh
+      - "-c"
+      - "precreate-core spotlight-test /opt/solr/solr_conf; solr-precreate ${SOLR_CORE} /opt/solr/solr_conf"
+
+  spotlight:
+    build:
+      context: spotlight
+      args:
+        RAILS_ENV: ${RAILS_ENV}
+    command: bash -c "/bin/docker-entrypoint.sh"
+    env_file:
+      - .env
+    environment:
+      - VIRTUAL_HOST=spotlight.docker
+      - VIRTUAL_PORT=3000
+    networks:
+      internal:
+    depends_on:
+      - sdb
+      - solr
+    expose:
+      - 3005
+
+
+

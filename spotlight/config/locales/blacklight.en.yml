@@ -1,3 +1,14 @@
 en:
   blacklight:
-    application_name: 'Blacklight'
+    application_name: 'Digital WPI'
+    footer:
+      copyright_html: "<strong>Copyright &copy; 2018 Samvera</strong> Licensed under the Apache License, Version 2.0"
+      service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
+    institution_name: WPI
+    institution_name_full: Worcester Polytechnic Institute
+    institution_address: "100 Institute Road, Worcester MA 01609-2280 USA"
+    product_name: Digital WPI
+    product_twitter_handle: "@SamveraRepo"
+    controls:
+      home: Home
+      help: Help
