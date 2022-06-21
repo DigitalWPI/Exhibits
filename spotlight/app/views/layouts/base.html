@@ -31,7 +31,6 @@
     <%= content_for(:skip_links) %>
 </div>
 
-<%= render partial: 'shared/header_navbar' %>
 <%= render partial: 'shared/masthead' %>
 <%= content_for?(:header_content) ? yield(:header_content) : "" %>
 
