@@ -23,7 +23,6 @@ spotlight/storage/*
 
 **/node_modules
 **/yarn-error.log
-**/*lock*
 
 spotlight/public/assets
 .byebug_history
@@ -33,3 +32,7 @@ spotlight/config/master.key
 
 .idea/*
 .env
+spotlight/package-lock.json
+spotlight/public/uploads/
+spotlight/yarn.lock
+
