@@ -301,8 +301,6 @@ class CatalogController < ApplicationController
     config.add_sort_field 'date_modified_desc', sort: "#{modified_field} desc", label: "date modified \u25BC"
     config.add_sort_field 'date_modified_asc', sort: "#{modified_field} asc", label: "date modified \u25B2"
 
-    config.index.thumbnail_method = :render_thumbnail
-
 
     # Set which views by default only have the title displayed, e.g.,
     # config.view.gallery.title_only_by_default = true
