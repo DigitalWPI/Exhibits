@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   mount Spotlight::Engine, at: 'spotlight'
   mount Blacklight::Engine => '/'
 
-  get '/downloads/:id', to: redirect { |params, request| "https://digital.wpi.edu/downloads/#{request.params[:id]}?#{request.params.except(:id).to_query}" }
+  get '/downloads/:id', to: redirect { |params, request| "https://#{ENV['SERVERNAME'].to_s}/downloads/#{request.params[:id]}?#{request.params.except(:id).to_query}" }
 
   concern :searchable, Blacklight::Routes::Searchable.new
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
