@@ -1,11 +1,10 @@
 development:
-  url: redis://<%= ENV['REDIS_HOST'] || 'localhost' %>:<%= ENV['REDIS_PORT'] || '6379' %>/1
-  channel_prefix: spotlight_development
+  adapter: async
 
 test:
   adapter: async
 
 production:
   adapter: redis
-  url: redis://<%= ENV['REDIS_HOST'] || 'redis' %>:<%= ENV['REDIS_PORT'] || '6379' %>/1
-  channel_prefix: spotlight_production
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: digitalwpi-spotlight_production

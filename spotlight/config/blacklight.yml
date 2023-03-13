@@ -1,12 +1,11 @@
 load_defaults: 7.24.0
 development:
   adapter: solr
-  # url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/digitalwpi" %>
-  # url: "http://dgtl-db-p-u01.wpi.edu:8983/solr/digitalwpi"
   url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/digitalwpi" %>
 test: &test
   adapter: solr
   url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/digitalwpi" %>
 production:
   adapter: solr
-  url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/digitalwpi" %>
+  url: <%= ENV['SOLR_HOST'] %>
+  #  url: <%= ENV['SOLR_URL'] || "http://127.0.0.1:8983/solr/digitalwpi" %>
