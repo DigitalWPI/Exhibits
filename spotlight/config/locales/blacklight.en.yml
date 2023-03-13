@@ -12,3 +12,38 @@ en:
     controls:
       home: Home
       help: Help
+    search:
+      index:
+        label:
+          title_tesim: "Title"
+          keyword_tesim: "Keyword"
+          creator_tesim: "Creator"
+          advisor_tesim: "Advisor"
+          publisher_tesim: "Publisher"
+          date_created_dtsim: "Date created"
+          resource_type_tesim: "Resource Type"
+          degree_tesim: "Degree"
+          department_tesim: "Unit"
+        show:
+          label:
+            id: "Record in Digital WPI"
+            title_tesim: "Title"
+            description_tesim: "Description"
+            keyword_tesim: "Keyword"
+            creator_tesim: "Creator"
+            advisor_tesim: "Advisor"
+            contributor_tesim: "Contributor"
+            publisher_tesim: "Publisher"
+            date_created_dtsim: "Date created"
+            degree_tesim: "Degree"
+            department_tesim: "Unit"
+            format_tesim: "Format"
+            identifier_tesim: "Identifier"
+            subject_tesim: "Resource Type"
+            based_near_label_tesim: "Based near"
+            language_tesim: "Language"
+            date_uploaded_dtsim: "Date uploaded"
+            date_modified_dtsim: "Date modified"
+            rights_statement_tesim: "Rights statement"
+            license_tesim: "License"
+            resource_type_tesim: "Resource type"

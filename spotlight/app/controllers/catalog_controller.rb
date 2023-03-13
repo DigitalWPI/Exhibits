@@ -72,7 +72,7 @@ class CatalogController < ApplicationController
     config.add_index_field "creator_tesim", label: "Creator", itemprop: 'creator', link_to_search: "creator_sim"
     config.add_index_field "advisor_tesim", label: "Advisor", itemprop: 'advisor', link_to_search: "advisor_sim"
     config.add_index_field "publisher_tesim", label: "Publisher", itemprop: 'publisher', link_to_search: "publisher_sim"
-    config.add_index_field "date_created_dtsim", label: "date created", itemprop: 'dateCreated'
+    config.add_index_field "date_created_dtsim", label: "Date created", itemprop: 'dateCreated'
     config.add_index_field "resource_type_tesim", label: "Resource Type", link_to_search: "resource_type_sim"
     config.add_index_field "degree_tesim", label: "Degree"
     config.add_index_field "department_tesim", label: "Unit"
@@ -101,9 +101,10 @@ class CatalogController < ApplicationController
     config.add_show_field "description_tesim", label: "Description"
     config.add_show_field "keyword_tesim", label: "Keyword"
     config.add_show_field "creator_tesim", label: "Creator"
+    config.add_show_field "advisor_tesim", label: "Advisor"
     config.add_show_field "contributor_tesim", label: "Contributor"
     config.add_show_field "publisher_tesim", label: "Publisher"
-    config.add_show_field "date_created_tesim", label: "date created"
+    config.add_show_field "date_created_tesim", label: "Date created"
     config.add_show_field "degree_tesim", label: "Degree"
     config.add_show_field "department_tesim", label: "Unit"
     config.add_show_field "format_tesim", label: "Format"
