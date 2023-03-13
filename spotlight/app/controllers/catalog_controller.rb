@@ -96,6 +96,7 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
+    config.add_show_field "id", label: "Record in Digital WPI", helper_method: :digital_wpi_link
     config.add_show_field "title_tesim", label: "Title"
     config.add_show_field "description_tesim", label: "Description"
     config.add_show_field "keyword_tesim", label: "Keyword"
