@@ -17,9 +17,18 @@
   </div>
 
   <!-- Brand and toggle get grouped for better mobile display -->
-  <div class="large-header-nav col-sm-6 col-sm-offset-3 search-holder">
-    <h3>Explore, Discover, Share</h3>
-    <%= render partial: 'catalog/search_form' %>
-  </div>
-  </div>
+  <% if current_exhibit %>
+    <% if should_render_spotlight_search_bar? %>
+      <div class="large-header-nav col-sm-6 col-sm-offset-3 search-holder">
+        <h3>Explore, Discover, Share</h3>
+        <%= render partial: 'catalog/search_form' %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="large-header-nav col-sm-6 col-sm-offset-3 search-holder">
+      <h3>Explore, Discover, Share</h3>
+      <%= render partial: 'catalog/search_form' %>
+    </div>
+  <% end %>
+
 </div>
