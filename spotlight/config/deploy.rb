@@ -2,11 +2,11 @@
 lock "~> 3.17.0"
 my_app_name = "spotlight"
 set :application, "#{my_app_name}"
-set :repo_url, "https://github.com/CottageLabs/spotlight.git"
+set :repo_url, "https://github.com/DigitalWPI/Exhibits.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-set :branch, ENV.fetch('REVISION', 'master')
+set :branch, ENV.fetch('REVISION', 'main')
 
 
 # Default deploy_to directory is /var/www/my_app_name
