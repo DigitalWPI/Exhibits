@@ -8,7 +8,8 @@ Bundler.require(*Rails.groups)
 
 module DigitalwpiSpotlight
   class Application < Rails::Application
-          config.action_mailer.default_url_options = { host: "localhost:3000", from: "noreply@example.com" }
+          #config.action_mailer.default_url_options = { host: "localhost:3000", from: "noreply@example.com" }
+          config.action_mailer.default_url_options = { host: "#{ENV['EXHIBITS_SERVERNAME']}", from: "#{ENV['MAILUSER']}" }
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
