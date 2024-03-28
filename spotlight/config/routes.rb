@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   mount Spotlight::Engine, at: 'spotlight'
   mount Blacklight::Engine => '/'
 
+  get '/downloads/:id', to: redirect { |params, request| "#{ENV['HYRAX_HOST_URL']}/downloads/#{request.params[:id]}?#{request.params.except(:id).to_query}" }
+
   concern :searchable, Blacklight::Routes::Searchable.new
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable

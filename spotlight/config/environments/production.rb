@@ -65,6 +65,22 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.default_url_options = { :host => ENV['EXHIBITS_SERVERNAME']}
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  address: ENV['MAILSERVER'],
+  port: ENV['MAILPORT'] || '587'
+  }
+  if not ENV['EXHIBITS_MAILPASS'].nil? and not ENV['EXHIBITS_MAILPASS'].empty? # if there is a passphrase, add the auth stuff, otherwise F off
+    config.action_mailer.smtp_settings.merge!({
+      user_name: ENV['MAILUSER'],
+      password: ENV['EXHIBITS_MAILPASS'],
+      authentication: :login,
+      enable_starttls_auto: true
+    })
+  end
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

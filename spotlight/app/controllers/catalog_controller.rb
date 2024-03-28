@@ -14,8 +14,8 @@ class CatalogController < ApplicationController
   end
 
   configure_blacklight do |config|
-          config.show.oembed_field = :oembed_url_ssm
-          config.show.partials.insert(1, :oembed)
+    config.show.oembed_field = :oembed_url_ssm
+    config.show.partials.insert(1, :oembed)
 
     config.view.gallery.document_component = Blacklight::Gallery::DocumentComponent
     # config.view.gallery.classes = 'row-cols-2 row-cols-md-3'
@@ -27,6 +27,7 @@ class CatalogController < ApplicationController
     config.default_solr_params = {
       qt: 'search',
       rows: 10,
+      qf: "title_tesim description_tesim creator_tesim keyword_tesim",
       fl: '*'
     }
 
@@ -46,70 +47,76 @@ class CatalogController < ApplicationController
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
-    config.add_facet_field "human_readable_type_tesim", label: "Type", limit: 5
-    config.add_facet_field "year_tesim", label: "Year", limit: 5, sort: 'index desc'
-    config.add_facet_field "creator_tesim", label: "Creator", limit: 5, sort: 'index', index_range: 'A'..'Z'
-    config.add_facet_field "advisor_tesim", label: "Advisor", limit: 5, sort: 'index', index_range: 'A'..'Z'
-    config.add_facet_field "contributor_tesim", label: "Contributor", limit: 5, sort: 'index', index_range: 'A'..'Z'
-    config.add_facet_field "center_tesim", label: "Project Center", limit: 5, sort: 'index', index_range: 'A'..'Z'
-    config.add_facet_field "major_tesim", label: "Major", limit: 5, sort: 'index', index_range: 'A'..'Z'
-    config.add_facet_field "department_tesim", label: "Unit", limit: 5, sort: 'index', index_range: 'A'..'Z'
-    config.add_facet_field "publisher_tesim", label: "Publisher", limit: 5
-    config.add_facet_field "subject_tesim", label: "Subject", limit: 5, sort: 'index', index_range: 'A'..'Z'
-    config.add_facet_field "resource_type_tesim", label: "Resource Type", limit: 5
-    #config.add_facet_field "language_tesim", limit: 5
+    config.add_facet_field "human_readable_type_sim", label: "Type", limit: 5
+    config.add_facet_field "member_of_collection_ids_ssim", label: 'Collections', sort: 'count'
+    config.add_facet_field "year_sim", label: "Year", limit: 5, sort: 'index desc'
+    config.add_facet_field "creator_sim", label: "Creator", limit: 5, sort: 'index', index_range: 'A'..'Z'
+    config.add_facet_field "advisor_sim", label: "Advisor", limit: 5, sort: 'index', index_range: 'A'..'Z'
+    config.add_facet_field "contributor_sim", label: "Contributor", limit: 5, sort: 'index', index_range: 'A'..'Z'
+    config.add_facet_field "center_sim", label: "Project Center", limit: 5, sort: 'index', index_range: 'A'..'Z'
+    config.add_facet_field "major_sim", label: "Major", limit: 5, sort: 'index', index_range: 'A'..'Z'
+    config.add_facet_field "department_sim", label: "Unit", limit: 5, sort: 'index', index_range: 'A'..'Z'
+    config.add_facet_field "publisher_sim", label: "Publisher", limit: 5
+    config.add_facet_field "subject_sim", label: "Subject", limit: 5, sort: 'index', index_range: 'A'..'Z'
+    config.add_facet_field "sdg_sim", label: "UN SDG", limit: 17, sort: 'index'
+    config.add_facet_field "resource_type_sim", label: "Resource Type", limit: 5
+    #config.add_facet_field "language_sim", limit: 5
     # The generic_type isn't displayed on the facet list
     # It's used to give a label to the filter that comes from the user profile
     # config.add_facet_field solr_name("generic_type", :facetable), if: false
 
     # # solr fields to be displayed in the index (search results) view
     # #   The ordering of the field names is the order of the display
-    # config.add_index_field "title_tesim", label: "Title", itemprop: 'name', if: false
-    # # config.add_index_field description_tesim, itemprop: 'description', helper_method: :iconify_auto_link
-    # config.add_index_field "keyword_tesim", itemprop: 'keywords', link_to_search: solr_name("keyword", :facetable)
-    # # config.add_index_field "subject_tesim", itemprop: 'about', link_to_search: solr_name("subject", :facetable)
-    # config.add_index_field "creator_tesim", itemprop: 'creator', link_to_search: "creator_tesim"
-    # #config.add_index_field solr_name("contributor", :stored_searchable), itemprop: 'contributor', link_to_search: "contributor_tesim"
-    # config.add_index_field solr_name("advisor", :stored_searchable), label: "Advisor", itemprop: 'advisor', link_to_search: "advisor_tesim"
-    # # config.add_index_field solr_name("proxy_depositor", :symbol), label: "Depositor", helper_method: :link_to_profile
-    # # config.add_index_field solr_name("depositor"), label: "Owner", helper_method: :link_to_profile
-    # config.add_index_field solr_name("publisher", :stored_searchable), itemprop: 'publisher', link_to_search: solr_name("publisher", :facetable)
-    # # config.add_index_field solr_name("based_near_label", :stored_searchable), itemprop: 'contentLocation', link_to_search: solr_name("based_near_label", :facetable)
-    # # config.add_index_field solr_name("language", :stored_searchable), itemprop: 'inLanguage', link_to_search: "language_tesim"
-    # # config.add_index_field solr_name("date_uploaded", :stored_sortable, type: :date), itemprop: 'datePublished', helper_method: :human_readable_date
-    # # config.add_index_field solr_name("date_modified", :stored_sortable, type: :date), itemprop: 'dateModified', helper_method: :human_readable_date
-    # config.add_index_field solr_name("date_created", :stored_searchable), itemprop: 'dateCreated'
-    # # config.add_index_field solr_name("rights_statement", :stored_searchable), helper_method: :rights_statement_links
-    # # config.add_index_field solr_name("license", :stored_searchable), helper_method: :license_links
-    # config.add_index_field solr_name("resource_type", :stored_searchable), label: "Resource Type", link_to_search: solr_name("resource_type", :facetable)
-    # # config.add_index_field solr_name("file_format", :stored_searchable), link_to_search: solr_name("file_format", :facetable)
-    # # config.add_index_field solr_name("identifier", :stored_searchable), helper_method: :index_field_link, field_name: 'identifier'
-    # # config.add_index_field solr_name("embargo_release_date", :stored_sortable, type: :date), label: "Embargo release date", helper_method: :human_readable_date
-    # # config.add_index_field solr_name("lease_expiration_date", :stored_sortable, type: :date), label: "Lease expiration date", helper_method: :human_readable_date
-    # config.add_index_field solr_name("degree", :stored_searchable), label: "Degree"
-    # config.add_index_field solr_name("department", :stored_searchable), label: "Unit"
+    config.add_index_field "title_tesim", label: "Title", itemprop: 'name', if: false
+    config.add_index_field "keyword_tesim", label: "Keyword", itemprop: 'keywords', link_to_search: 'keyword_sim'    
+    config.add_index_field "creator_tesim", label: "Creator", itemprop: 'creator', link_to_search: "creator_sim"
+    config.add_index_field "advisor_tesim", label: "Advisor", itemprop: 'advisor', link_to_search: "advisor_sim"
+    config.add_index_field "publisher_tesim", label: "Publisher", itemprop: 'publisher', link_to_search: "publisher_sim"
+    config.add_index_field "date_created_dtsim", label: "Date created", itemprop: 'dateCreated'
+    config.add_index_field "resource_type_tesim", label: "Resource Type", link_to_search: "resource_type_sim"
+    config.add_index_field "degree_tesim", label: "Degree"
+    config.add_index_field "department_tesim", label: "Unit"
+    # config.add_index_field "description_tesim", label: "Description", itemprop: 'description' #, helper_method: :iconify_auto_link
+    # config.add_index_field "subject_tesim", label: "Subject", itemprop: 'about', link_to_search: "subject_sim"
+    # config.add_index_field "contributor_tesim", label: "Contributor", itemprop: 'contributor', link_to_search: "contributor_sim"
+    # config.add_index_field "proxy_depositor_ssim", label: "Depositor"#, helper_method: :link_to_profile
+    # config.add_index_field "depositor_tesim", label: "Owner" #, helper_method: :link_to_profile
+    # config.add_index_field "based_near_label_tesim", label: "Based near", itemprop: 'contentLocation', link_to_search: "based_near_label_sim"
+    # config.add_index_field "language_tesim", label: "Language", itemprop: 'inLanguage', link_to_search: "language_sim"
+    # config.add_index_field "date_uploaded_dtsi", label: "date uploaded", itemprop: 'datePublished' #, helper_method: :human_readable_date
+    # config.add_index_field "date_modified_dtsi", label: "Date modified", itemprop: 'dateModified' #, helper_method: :human_readable_date
+    # config.add_index_field "rights_statement_tesim", label: "Rights statement" #, helper_method: :rights_statement_links
+    # config.add_index_field "license_tesim", label: "License field"#, helper_method: :license_links
+    # config.add_index_field "file_format_tesim", label: "File format", link_to_search: "file_format_sim"
+    # config.add_index_field "identifier_tesim", label: "Identifier" #, helper_method: :index_field_link, field_name: 'identifier'
+    # config.add_index_field "embargo_release_date_dtsi", label: "Embargo release date" #, helper_method: :human_readable_date
+    # config.add_index_field "lease_expiration_date_dtsi", label: "Lease expiration date", helper_method: :human_readable_date
+
+    
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
-    # config.add_show_field "title_tesim"
-    # config.add_show_field "description_tesim"
-    # config.add_show_field "keyword_tesim"
-    # config.add_show_field "creator_tesim"
-    # config.add_show_field solr_name("contributor", :stored_searchable)
-    # config.add_show_field solr_name("publisher", :stored_searchable)
-    # config.add_show_field solr_name("date_created", :stored_searchable)
-    # config.add_show_field solr_name("degree", :stored_searchable), label: "Degree"
-    # config.add_show_field solr_name("department", :stored_searchable), label: "Unit"
-    # config.add_show_field solr_name("format", :stored_searchable)
-    # config.add_show_field solr_name("identifier", :stored_searchable)
-    # config.add_show_field "subject_tesim"
-    # config.add_show_field solr_name("based_near_label", :stored_searchable)
-    # config.add_show_field solr_name("language", :stored_searchable)
-    # config.add_show_field solr_name("date_uploaded", :stored_searchable)
-    # config.add_show_field solr_name("date_modified", :stored_searchable)
-    # config.add_show_field solr_name("rights_statement", :stored_searchable)
-    # config.add_show_field solr_name("license", :stored_searchable)
-    # config.add_show_field solr_name("resource_type", :stored_searchable), label: "Resource Type"
+    config.add_show_field "id", label: "Record in Digital WPI", helper_method: :digital_wpi_link
+    config.add_show_field "title_tesim", label: "Title"
+    config.add_show_field "description_tesim", label: "Description"
+    config.add_show_field "keyword_tesim", label: "Keyword"
+    config.add_show_field "creator_tesim", label: "Creator"
+    config.add_show_field "advisor_tesim", label: "Advisor"
+    config.add_show_field "contributor_tesim", label: "Contributor"
+    config.add_show_field "publisher_tesim", label: "Publisher"
+    config.add_show_field "date_created_tesim", label: "Date created"
+    config.add_show_field "degree_tesim", label: "Degree"
+    config.add_show_field "department_tesim", label: "Unit"
+    config.add_show_field "format_tesim", label: "Format"
+    config.add_show_field "identifier_tesim", label: "Identifier"
+    config.add_show_field "subject_tesim", label: "Subject"
+    config.add_show_field "based_near_label_tesim", label: "Based near"
+    config.add_show_field "language_tesim", label: "Language"
+    config.add_show_field "date_uploaded_dtsim", label: "Date uploaded"
+    config.add_show_field "date_modified_dtsim", label: "Date modified"
+    config.add_show_field "rights_statement_tesim", label: "Rights statement"
+    config.add_show_field "license_tesim", label: "License"
+    config.add_show_field "resource_type_tesim", label: "Resource type"
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
     #
@@ -229,7 +236,7 @@ class CatalogController < ApplicationController
     end
 
     config.add_search_field('identifier') do |field|
-      solr_name = "id"
+      solr_name = "identifier_tesim"
       field.solr_local_parameters = {
         qf: solr_name,
         pf: solr_name
@@ -295,9 +302,6 @@ class CatalogController < ApplicationController
     config.add_sort_field 'date_uploaded_asc', sort: "#{uploaded_field} asc", label: "date uploaded \u25B2"
     config.add_sort_field 'date_modified_desc', sort: "#{modified_field} desc", label: "date modified \u25BC"
     config.add_sort_field 'date_modified_asc', sort: "#{modified_field} asc", label: "date modified \u25B2"
-
-    config.index.thumbnail_method = :render_thumbnail
-
 
     # Set which views by default only have the title displayed, e.g.,
     # config.view.gallery.title_only_by_default = true

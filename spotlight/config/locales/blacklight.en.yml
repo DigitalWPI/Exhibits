@@ -1,3 +1,50 @@
 en:
   blacklight:
-    application_name: 'Blacklight'
+    application_name: 'Digital WPI'
+    footer:
+      copyright_html: "<strong>Copyright &copy; 2018 Samvera</strong> Licensed under the Apache License, Version 2.0"
+      service_html: A service of <a href="http://samvera.org/" class="navbar-link" target="_blank">Samvera</a>.
+    institution_name: WPI
+    institution_name_full: Worcester Polytechnic Institute
+    institution_address: "100 Institute Road, Worcester MA 01609-2280 USA"
+    product_name: Digital WPI
+    product_twitter_handle: "@SamveraRepo"
+    controls:
+      home: Home
+      help: Help
+    search:
+      index:
+        label:
+          title_tesim: "Title"
+          keyword_tesim: "Keyword"
+          creator_tesim: "Creator"
+          advisor_tesim: "Advisor"
+          publisher_tesim: "Publisher"
+          date_created_dtsim: "Date created"
+          resource_type_tesim: "Resource Type"
+          degree_tesim: "Degree"
+          department_tesim: "Unit"
+      show:
+        label:
+          id: "Record in Digital WPI"
+          title_tesim: "Title"
+          description_tesim: "Description"
+          keyword_tesim: "Keyword"
+          creator_tesim: "Creator"
+          advisor_tesim: "Advisor"
+          contributor_tesim: "Contributor"
+          publisher_tesim: "Publisher"
+          date_created_dtsim: "Date created"
+          date_created_tesim: "Date created"
+          degree_tesim: "Degree"
+          department_tesim: "Unit"
+          format_tesim: "Format"
+          identifier_tesim: "Identifier"
+          subject_tesim: "Resource Type"
+          based_near_label_tesim: "Based near"
+          language_tesim: "Language"
+          date_uploaded_dtsim: "Date uploaded"
+          date_modified_dtsim: "Date modified"
+          rights_statement_tesim: "Rights statement"
+          license_tesim: "License"
+          resource_type_tesim: "Resource type"
