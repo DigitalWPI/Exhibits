@@ -1,0 +1,11 @@
+<% if document[:has_model_ssim] != ["Collection"] %>
+  <iframe
+    class="universal-viewer-iframe"
+    src="<%= request&.base_url %>/uv/uv.html#?manifest=<%= manifest_url(document) %>&config=<%= request&.base_url %>/uv/uv-config.json"
+    width="640"
+    height="480"
+    allowfullscreen
+    frameborder="0">
+  </iframe>
+  </br>
+<% end %>
