@@ -1,9 +1,9 @@
 <footer class="navbar navbar-inverse site-footer">
   <div class="container-fluid">
     <div class="navbar-text text-left">
+        <p class="nav_digital_wpi"><%= link_to(t('blacklight.product_name'), ENV["HYRAX_HOST_URL"]) %></p>
+        <p class="nav_contact_us"><%= mail_to "digitalwpi@wpi.edu", "Contact Us"%></p>
         <p><%= t('blacklight.footer.service_html') %></p>
-        <p><%= link_to(t('blacklight.product_name'), ENV["HYRAX_HOST_URL"]) %></p>
-        <p><%= mail_to "digitalwpi@wpi.edu", "Contact Us"%></p>
     </div>
     <div class="navbar-right">
       <div class="text-right">
