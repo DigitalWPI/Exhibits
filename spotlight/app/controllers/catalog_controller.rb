@@ -14,15 +14,17 @@ class CatalogController < ApplicationController
   end
 
   configure_blacklight do |config|
-    config.show.oembed_field = :oembed_url_ssm
-    config.show.partials.insert(1, :oembed)
+    #config.show.oembed_field = :oembed_url_ssm
+    #config.show.partials.insert(1, :oembed)
+    #config.show.partials.insert(1, :uv)
 
     config.view.gallery.document_component = Blacklight::Gallery::DocumentComponent
     # config.view.gallery.classes = 'row-cols-2 row-cols-md-3'
     config.view.masonry.document_component = Blacklight::Gallery::DocumentComponent
     config.view.slideshow.document_component = Blacklight::Gallery::SlideshowComponent
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
-    config.show.partials.insert(1, :openseadragon)
+    # config.show.partials.insert(1, :openseadragon)
+    config.show.partials.insert(1, :universal_viewer)
     ## Default parameters to send to solr for all search-like requests. See also SolrHelper#solr_search_params
     config.default_solr_params = {
       qt: 'search',
