@@ -308,4 +308,10 @@ class CatalogController < ApplicationController
     # Set which views by default only have the title displayed, e.g.,
     # config.view.gallery.title_only_by_default = true
   end
+
+  private
+
+  def determine_layout
+    "blacklight"
+  end
 end
