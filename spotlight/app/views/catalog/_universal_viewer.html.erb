@@ -1,6 +1,6 @@
 <% if document[:has_model_ssim] != ["Collection"] %>
   <% first_file_set_id = document[:file_set_ids_ssim].first
-    _, f_set = @search_service.fetch first_file_set_id
+    _, f_set = controller.search_service.fetch first_file_set_id
   %>
   <% if f_set[:mime_type_ssi].include?("image")%>
     <iframe
