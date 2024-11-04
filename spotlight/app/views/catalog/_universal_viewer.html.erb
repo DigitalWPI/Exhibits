@@ -1,0 +1,26 @@
+<% if document[:has_model_ssim] != ["Collection"] %>
+  <% first_file_set_id = document[:file_set_ids_ssim].first
+    _, f_set = controller.search_service.fetch first_file_set_id
+  %>
+  <% if f_set[:mime_type_ssi].include?("image")%>
+    <iframe
+      class="universal-viewer-iframe"
+      src="<%= request&.base_url %>/uv/uv.html#?manifest=<%= manifest_url(document) %>&config=<%= request&.base_url %>/uv/uv-config.json"
+      width="100%"
+      height="640"
+      allowfullscreen="true"
+      frameborder="0">
+    </iframe>
+  <% else %>
+    <div class="col-sm-3 text-center">
+      <%= image_tag catalog_thumbnail_url(f_set),
+                    class: "representative-media",
+                    alt: "",
+                    role: "presentation" %>
+      <% if f_set[:mime_type_ssi].include?("pdf") %>
+        <%= link_to "open in viewer", pdfviewer_url(f_set), target:"_blank", data: { turbolinks: false } %>
+      <% end %>
+    </div>
+  <% end %>
+  </br>
+<% end %>

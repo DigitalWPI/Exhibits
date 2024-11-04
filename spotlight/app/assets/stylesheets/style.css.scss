@@ -42,6 +42,17 @@ $color-red: #FF0000;
                 }
             }
         }
+        .nav_digital_wpi {
+            a {
+                color:#fff !important;
+                font-weight: bold;
+            }
+        }
+        .nav_contact_us {
+            a {
+                color:#fff;
+            }
+        }
     }
     .text-right{
         color:#ddd;
@@ -631,4 +642,11 @@ h2.slider {
   border:1px solid lightgray;
   padding:15px;
   margin: 10px 10px 10px -30px;
+}
+
+
+.representative-media {
+    display: block;
+    padding: 0.5em 0;
+    width: 100%;
 }
