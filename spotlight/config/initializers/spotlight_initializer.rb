@@ -71,8 +71,8 @@ Spotlight::Engine.config.thumbnail_field = 'thumbnail_path_ss'
 
 # ==> Matomo Analytics integration
 Spotlight::Engine.config.analytics = true
-Spotlight::Engine.config.base_url: <%= ENV['EXHIBITS_MATOMO_BASE_URL'] %>
-Spotlight::Engine.config.site_id: <%= ENV['EXHIBITS_MATOMO_SITE_ID'] %>
+Spotlight::Engine.config.base_url = ENV['EXHIBITS_MATOMO_BASE_URL']
+Spotlight::Engine.config.site_id = ENV['EXHIBITS_MATOMO_SITE_ID']
 
 # ==> Sir Trevor Widget Configuration
 # These are set by default by Spotlight's configuration,
