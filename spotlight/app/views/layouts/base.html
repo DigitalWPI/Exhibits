@@ -20,6 +20,10 @@
     <%= twitter_card %>
     <%= opengraph %>
     <%= javascript_tag '$.fx.off = true;' if Rails.env.test? %>
+    <% if Spotlight::Engine.config.analytics? %>
+      <%= render partial: 'shared/analytics', formats: [:html] %>
+    <% end %>
+
 </head>
 <body class="<%= render_body_class %>">
 <%= render partial: 'shared/body_preamble' %>
