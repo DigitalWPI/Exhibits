@@ -69,6 +69,11 @@ Spotlight::Engine.config.thumbnail_field = 'thumbnail_path_ss'
 # Spotlight::Engine.config.ga_page_analytics_options = config.ga_analytics_options.merge(limit: 5)
 # Spotlight::Engine.config.ga_anonymize_ip = false # false for backwards compatibility
 
+# ==> Matomo Analytics integration
+Spotlight::Engine.config.analytics = true
+Spotlight::Engine.config.base_url = ENV['EXHIBITS_MATOMO_BASE_URL']
+Spotlight::Engine.config.site_id = ENV['EXHIBITS_MATOMO_SITE_ID']
+
 # ==> Sir Trevor Widget Configuration
 # These are set by default by Spotlight's configuration,
 # but you can customize them here, or in the SirTrevorRails::Block#custom_block_types method
