@@ -13,6 +13,10 @@ class CatalogController < ApplicationController
     'system_modified_dtsi'
   end
 
+  def self.title_sort
+    "title_ansort"
+  end
+
   configure_blacklight do |config|
     #config.show.oembed_field = :oembed_url_ssm
     #config.show.partials.insert(1, :oembed)
@@ -50,7 +54,7 @@ class CatalogController < ApplicationController
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
     config.add_facet_field "human_readable_type_sim", label: "Type", limit: 5
-    config.add_facet_field "member_of_collection_ids_ssim", label: 'Collections', sort: 'count'
+    config.add_facet_field "member_of_collections_ssim", label: 'Collections', sort: 'count'
     config.add_facet_field "year_sim", label: "Year", limit: 5, sort: 'index desc'
     config.add_facet_field "creator_sim", label: "Creator", limit: 5, sort: 'index', index_range: 'A'..'Z'
     config.add_facet_field "advisor_sim", label: "Advisor", limit: 5, sort: 'index', index_range: 'A'..'Z'
@@ -300,6 +304,8 @@ class CatalogController < ApplicationController
     # except in the relevancy case).
     # label is key, solr field is value
     config.add_sort_field 'relevance', sort: "score desc, #{uploaded_field} desc", label: I18n.t('spotlight.search.fields.sort.relevance')
+    config.add_sort_field 'title_desc', sort: "#{title_sort} desc", label: "Title \u25BC"
+    config.add_sort_field 'title_asc', sort: "#{title_sort} asc", label: "Title \u25B2"
     config.add_sort_field 'date_uploaded_desc', sort: "#{uploaded_field} desc", label: "date uploaded \u25BC"
     config.add_sort_field 'date_uploaded_asc', sort: "#{uploaded_field} asc", label: "date uploaded \u25B2"
     config.add_sort_field 'date_modified_desc', sort: "#{modified_field} desc", label: "date modified \u25BC"
